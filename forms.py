@@ -4,14 +4,29 @@ from wtforms import StringField, SelectField, SelectMultipleField, DateTimeField
 from wtforms.validators import DataRequired, AnyOf, URL, Regexp
 from enum import Enum
 
-class genValidGenres():
-    def __init__(self,valid_genres):
-        self.valid_genres = valid_genres
-
-    def valid_genres(self):
-        return self.valid_genres
-
-
+class ValidGenres():
+    ValidGenres = [
+        ('Alternative', 'Alternative'),
+        ('Blues', 'Blues'),
+        ('Classical', 'Classical'),
+        ('Country', 'Country'),
+        ('Electronic', 'Electronic'),
+        ('Folk', 'Folk'),
+        ('Funk', 'Funk'),
+        ('Hip-Hop', 'Hip-Hop'),
+        ('Heavy Metal', 'Heavy Metal'),
+        ('Instrumental', 'Instrumental'),
+        ('Jazz', 'Jazz'),
+        ('Musical Theatre', 'Musical Theatre'),
+        ('Pop', 'Pop'),
+        ('Punk', 'Punk'),
+        ('R&B', 'R&B'),
+        ('Reggae', 'Reggae'),
+        ('Rock n Roll', 'Rock n Roll'),
+        ('Soul', 'Soul'),
+        ('Other', 'Other'),
+        ('test', 'test'),
+    ]
 
     
 class ShowForm(Form):
@@ -29,7 +44,6 @@ class ShowForm(Form):
 
 class VenueForm(Form):
  
-
     name = StringField(
         'name', validators=[DataRequired()]
     )
@@ -99,35 +113,14 @@ class VenueForm(Form):
         'phone', validators = [DataRequired(),Regexp('^[0-9]{3}-[0-9]{3}-[0-9]{4}$', message='Invalid phone number use this format: xxx-xxx-xxxx')]
     )
     image_link = StringField(
-        'image_link'
+        'image_link' , validators=[URL()]
     )
-    
-
+ 
     genres = SelectMultipleField(
         # TODO implement enum restriction
 
         'genres', validators=[DataRequired()],
-        choices=[
-            ('Alternative', 'Alternative'),
-            ('Blues', 'Blues'),
-            ('Classical', 'Classical'),
-            ('Country', 'Country'),
-            ('Electronic', 'Electronic'),
-            ('Folk', 'Folk'),
-            ('Funk', 'Funk'),
-            ('Hip-Hop', 'Hip-Hop'),
-            ('Heavy Metal', 'Heavy Metal'),
-            ('Instrumental', 'Instrumental'),
-            ('Jazz', 'Jazz'),
-            ('Musical Theatre', 'Musical Theatre'),
-            ('Pop', 'Pop'),
-            ('Punk', 'Punk'),
-            ('R&B', 'R&B'),
-            ('Reggae', 'Reggae'),
-            ('Rock n Roll', 'Rock n Roll'),
-            ('Soul', 'Soul'),
-            ('Other', 'Other'),
-        ]
+        choices=ValidGenres().ValidGenres
     )
     facebook_link = StringField(
         'facebook_link', validators=[URL()]
@@ -136,8 +129,8 @@ class VenueForm(Form):
 
 
 class ArtistForm(Form):
-    def set_genres(self,choices):
-        self.genres.choices = choices
+    # def set_genres(self,choices):
+    #     self.genres.choices = choices
 
     name = StringField(
         'name', validators=[DataRequired()]
@@ -208,32 +201,12 @@ class ArtistForm(Form):
     #^[0-9]{3}-[0-9]{3}-[0-9]{4}$
 
     image_link = StringField(
-        'image_link'
+        'image_link', validators=[URL()]
     )
     genres = SelectMultipleField(
         # TODO implement enum restriction
         'genres', validators=[DataRequired()],
-        choices=[
-            ('Alternative', 'Alternative'),
-            ('Blues', 'Blues'),
-            ('Classical', 'Classical'),
-            ('Country', 'Country'),
-            ('Electronic', 'Electronic'),
-            ('Folk', 'Folk'),
-            ('Funk', 'Funk'),
-            ('Hip-Hop', 'Hip-Hop'),
-            ('Heavy Metal', 'Heavy Metal'),
-            ('Instrumental', 'Instrumental'),
-            ('Jazz', 'Jazz'),
-            ('Musical Theatre', 'Musical Theatre'),
-            ('Pop', 'Pop'),
-            ('Punk', 'Punk'),
-            ('R&B', 'R&B'),
-            ('Reggae', 'Reggae'),
-            ('Rock n Roll', 'Rock n Roll'),
-            ('Soul', 'Soul'),
-            ('Other', 'Other'),
-        ]
+        choices=ValidGenres().ValidGenres
     )
     facebook_link = StringField(
         # TODO implement enum restriction
