@@ -224,7 +224,6 @@ def create_venue_submission():
   try:
       form = VenueForm(request.form)
       if form.validate_on_submit():
-        print('HHHHHHHHHEEEEEEEEEERRRRRREEEEEE')
         new_venue = Venue(name=form.name.data,city=form.city.data,state=form.state.data,address=form.address.data,phone=form.phone.data,facebook_link=form.facebook_link.data,image_link=form.image_link.data)
         print(form.image_link.data)
         genres_names =form.genres.data
